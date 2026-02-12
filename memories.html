@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXR 27 | Memory</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --spotify:#1DB954;
+ --card:#121212;
+}
+
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ font-family:Poppins;
+}
+
+body{
+ background:radial-gradient(circle at top,#111,#000);
+ color:#fff;
+}
+
+/* MENU BUTTON */
+.menu-btn{
+ position:fixed;
+ top:20px;
+ left:20px;
+ width:50px;
+ height:50px;
+ border-radius:50%;
+ background:var(--spotify);
+ border:none;
+ font-size:1.4rem;
+ z-index:1000;
+ box-shadow:0 0 15px rgba(29,185,84,.5);
+}
+
+/* PROFILE */
+.profile-btn{
+ position:fixed;
+ top:20px;
+ right:20px;
+ width:48px;
+ height:48px;
+ border-radius:50%;
+ overflow:hidden;
+ border:2px solid var(--spotify);
+}
+
+.profile-btn img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+}
+
+/* MENU */
+.nav{
+ position:fixed;
+ top:0;
+ left:-260px;
+ width:260px;
+ height:100%;
+ background:#000;
+ padding:100px 20px;
+ transition:.3s;
+}
+
+.nav.active{
+ left:0;
+}
+
+.nav div{
+ margin-bottom:25px;
+ cursor:pointer;
+ font-size:1.1rem;
+}
+
+.nav div:hover{
+ color:var(--spotify);
+}
+
+section{
+ padding:110px 5% 40px;
+ min-height:100vh;
+}
+
+/* GALLERY */
+.gallery-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:14px;
+ margin-top:30px;
+}
+
+.photo{
+ background:var(--card);
+ border-radius:16px;
+ overflow:hidden;
+ transition:.3s;
+}
+
+.photo:hover{
+ transform:translateY(-5px);
+ box-shadow:0 0 20px rgba(29,185,84,.3);
+}
+
+.photo img{
+ width:100%;
+ aspect-ratio:3/4;
+ object-fit:cover;
+}
+
+.photo p{
+ text-align:center;
+ padding:8px;
+ color:#ccc;
+}
+
+.actions{
+ text-align:center;
+ padding:6px;
+}
+
+.like{
+ cursor:pointer;
+ color:#aaa;
+}
+
+.like.active{
+ color:var(--spotify);
+}
+
+/* MUSIC GRID */
+.music-grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:16px;
+ margin-top:40px;
+}
+
+.music-card{
+ background:var(--card);
+ border-radius:18px;
+ padding:14px;
+ transition:.3s;
+}
+
+.music-card:hover{
+ transform:translateY(-6px);
+ box-shadow:0 0 20px rgba(29,185,84,.3);
+}
+
+.music-card img{
+ width:100%;
+ aspect-ratio:1/1;
+ object-fit:cover;
+ border-radius:12px;
+}
+
+.music-title{
+ margin-top:10px;
+ font-weight:600;
+}
+
+.play-btn{
+ margin-top:10px;
+ background:var(--spotify);
+ border:none;
+ padding:10px;
+ width:100%;
+ border-radius:20px;
+ cursor:pointer;
+ font-weight:600;
+}
+
+.play-btn:hover{
+ background:#1ed760;
+}
+
+/* SOCIAL ICONS */
+.social{
+ display:flex;
+ justify-content:center;
+ gap:25px;
+ margin-top:35px;
+}
+
+.social a{
+ width:50px;
+ height:50px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:50%;
+ color:white;
+ font-size:1.5rem;
+ text-decoration:none;
+ transition:.3s;
+}
+
+/* Instagram */
+.social a.instagram{
+ background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+}
+
+.social a.instagram:hover{
+ transform:scale(1.15);
+}
+
+/* TikTok */
+.social a.tiktok{
+ background:#000;
+ border:1px solid #333;
+}
+
+.social a.tiktok:hover{
+ box-shadow:0 0 12px #25F4EE,0 0 20px #FE2C55;
+ transform:scale(1.15);
+}
+
+/* Telegram */
+.social a.telegram{
+ background:#229ED9;
+}
+
+.social a.telegram:hover{
+ background:#2AABEE;
+ transform:scale(1.15);
+}
+
+.love-counter{
+ margin:18px auto 0;
+ padding:12px 18px;
+ max-width:90%;
+ text-align:center;
+ background:#1a1a1a;
+ border-radius:14px;
+ color:#ddd;
+ border:1px solid #2a2a2a;
+}
+
+</style>
+</head>
+
+<body>
+
+<button class="menu-btn" onclick="toggleMenu()">
+ <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="profile-btn">
+ <img src="profile.jpg">
+</div>
+
+<div class="nav" id="nav">
+ <div onclick="showPage('gallery')">
+  <i class="fas fa-images"></i> Memory
+ </div>
+ <div onclick="showPage('music')">
+  <i class="fas fa-music"></i> Album Music
+ </div>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery">
+
+<h1 style="text-align:center;font-size:2.5rem">My Memories</h1>
+<p style="text-align:center;color:#aaa">Memory Room</p>
+<div class="love-counter" id="loveCounter"></div>
+<div class="gallery-grid" id="galleryGrid"></div>
+
+<div class="social">
+ <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+ <a href="#" class="tiktok"><i class="fab fa-tiktok"></i></a>
+ <a href="#" class="telegram"><i class="fab fa-telegram"></i></a>
+</div>
+
+</section>
+
+<!-- MUSIC -->
+<section id="music" style="display:none">
+
+<h1 style="text-align:center;font-size:2.5rem">Album Music</h1>
+
+<div class="music-grid" id="musicGrid"></div>
+
+<audio id="audioPlayer"></audio>
+
+</section>
+
+<script>
+const photos = [
+ {img:"foto.jpg"},
+ {img:"foto2.jpg"},
+ {img:"foto3.jpg"},
+ {img:"foto4.jpg"},
+ {img:"foto5.jpg"},
+ {img:"foto6.jpg"}
+];
+
+const gallery = document.getElementById("galleryGrid");
+
+photos.forEach(p=>{
+ const div=document.createElement("div");
+ div.className="photo";
+ div.innerHTML=`
+  <img src="${p.img}">
+  <div class="actions">
+    <span class="like" onclick="likePhoto(this)">❤ Like</span>
+  </div>
+ `;
+ gallery.appendChild(div);
+});
+
+function likePhoto(el){
+ el.classList.toggle("active");
+}
+
+/* MUSIC */
+const musics=[
+ {title:"BIRDS OF FEATHER",cover:"songlogo.jpg",file:"song1.mp3"},
+ {title:"JUST THE WAY YOU ARE",cover:"songlogo2.jpg",file:"song2.mp3"},
+ {title:"ABOUT YOU",cover:"songlogo3.jpg",file:"song3.mp3"},
+ {title:"UNTIL I FOUND YOU",cover:"songlogo4.jpg",file:"song4.mp3"},
+ {title:"GIVE ME YOUR FOREVER",cover:"songlogo5.jpg",file:"song5.mp3"},
+ {title:"WHAT I THINK OF",cover:"songlogo6.jpg",file:"song6.mp3"}
+];
+
+const musicGrid=document.getElementById("musicGrid");
+const audio=document.getElementById("audioPlayer");
+
+musics.forEach(m=>{
+ const div=document.createElement("div");
+ div.className="music-card";
+ div.innerHTML=`
+   <img src="${m.cover}">
+   <div class="music-title">${m.title}</div>
+   <button class="play-btn" onclick="playMusic('${m.file}')">
+   ▶ Play
+   </button>
+ `;
+ musicGrid.appendChild(div);
+});
+
+function playMusic(src){
+ audio.src=src;
+ audio.play();
+}
+
+function toggleMenu(){
+ document.getElementById("nav").classList.toggle("active");
+}
+
+function showPage(page){
+ document.getElementById("gallery").style.display =
+  page==="gallery"?"block":"none";
+
+ document.getElementById("music").style.display =
+  page==="music"?"block":"none";
+
+ toggleMenu();
+}
+
+function updateLoveCounter(){
+
+  // tanggal mulai hubungan
+  // ubah sesuai tanggal kalian
+  const startDate = new Date("2025-01-27T00:00:00"); 
+  // jam 12 malam sesuai permintaan kamu
+
+  const now = new Date();
+
+  const diff = now - startDate;
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff / (1000*60*60)) % 24);
+  const minutes = Math.floor((diff / (1000*60)) % 60);
+
+  document.getElementById("loveCounter").innerHTML =
+    "♡ Together Since " +
+    days + " Days " +
+    hours + " Hours " +
+    minutes + " Minutes";
+}
+
+setInterval(updateLoveCounter, 60000);
+updateLoveCounter();
+
+</script>
+</body>
+</html>

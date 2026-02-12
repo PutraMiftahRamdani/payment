@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memories Intro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ font-family:'Rajdhani', sans-serif;
+}
+
+body{
+ background:#000;
+ color:white;
+ height:100vh;
+ overflow:hidden;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ flex-direction:column;
+}
+
+.text{
+ text-align:center;
+}
+
+.text h1,
+.text h2,
+.url{
+ opacity:0;
+ transform:translateX(-60px);
+}
+
+.text h1{
+ animation:slideIn .7s ease forwards;
+ color:#1fbf87;
+ letter-spacing:3px;
+}
+
+.text h2{
+ animation:slideIn .7s ease forwards;
+ animation-delay:.2s;
+}
+
+.url{
+ animation:slideIn .7s ease forwards;
+ animation-delay:.4s;
+ color:#666;
+}
+
+@keyframes slideIn{
+ to{
+  opacity:1;
+  transform:translateX(0);
+ }
+}
+
+.social{
+ position:absolute;
+ bottom:60px;
+ display:flex;
+ gap:20px;
+}
+
+.social a{
+ width:50px;
+ height:50px;
+ border-radius:50%;
+ background:#111;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ color:#1fbf87;
+ font-size:20px;
+ opacity:0;
+ transform:translateY(40px);
+ animation:riseBtn .6s ease forwards;
+}
+
+.social a:nth-child(1){animation-delay:.6s;}
+.social a:nth-child(2){animation-delay:.7s;}
+.social a:nth-child(3){animation-delay:.8s;}
+
+@keyframes riseBtn{
+ to{
+  opacity:1;
+  transform:translateY(0);
+ }
+}
+</style>
+</head>
+
+<body>
+
+<div class="text">
+ <h1>WELCOME TO</h1>
+ <h2>MEMORIES WEBSITE</h2>
+ <div class="url">ramzcore.space</div>
+</div>
+
+<div class="social">
+ <a href="#"><i class="fab fa-tiktok"></i></a>
+ <a href="#"><i class="fab fa-telegram"></i></a>
+ <a href="#"><i class="fab fa-instagram"></i></a>
+</div>
+
+<script>
+setTimeout(()=>{
+ window.location.href="memories.html";
+}, 3000);
+</script>
+
+</body>
+</html>
